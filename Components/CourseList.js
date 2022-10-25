@@ -1,13 +1,13 @@
-import { StyleSheet, Text, View, Pressable, Image } from 'react-native'
-import React from 'react'
-// import * as ProgressCircle from 'react-native-progress-circle'
+import { StyleSheet, Text, View, Pressable, Image } from 'react-native';
+import React, { useState } from 'react';
+import CircularProgress from 'react-native-circular-progress-indicator';
 
-// import 'react-circular-progressbar/dist/styles.css';
 
 const CourseList = ({ img, title, bg, onPress }) => {
+    const [value, setValue] = useState(0);
     return (
         <Pressable
-         onPress={onPress}>
+            onPress={onPress}>
             <View style={{
                 flexDirection: "row",
                 backgroundColor: bg,
@@ -40,7 +40,7 @@ const CourseList = ({ img, title, bg, onPress }) => {
                         10 hours, 19 lessons
                     </Text>
                 </View>
-                <Text style={{
+                {/* <Text style={{
                     color: "#345c74",
 
                     fontSize: 13,
@@ -53,8 +53,21 @@ const CourseList = ({ img, title, bg, onPress }) => {
 
                 <Image
                     source={require('../assets/images/pl.png')}
-                />
-
+                /> */}
+                <View style={{ marginLeft: 50 }}>
+                    <CircularProgress
+                        radius={20}
+                        value={value}
+                        textColor='#222'
+                        fontSize={10}
+                        valueSuffix={'%'}
+                        inActiveStrokeColor={'red'}
+                        inActiveStrokeOpacity={0.2}
+                        inActiveStrokeWidth={6}
+                        duration={1000}
+                        onAnimationComplete={() => setValue(50)}
+                    />
+                </View>
             </View>
         </Pressable>
     )

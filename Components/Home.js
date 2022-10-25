@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, Button, SafeAreaView } from 'react-native';
-import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { ScrollView, TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 import CourseList from "./CourseList";
 import { AntDesign, Octicons } from '@expo/vector-icons';
 
@@ -12,7 +14,7 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView>
       <ImageBackground
-        source={require('../assets/images/Home.png')}
+        source={require('../assets/images/Back3.jpg')}
         style={{ width: "100%", height: "100%" }}
       >
         <View style={{
@@ -30,26 +32,29 @@ const Home = ({ navigation }) => {
             alignItems: "center",
           }}>
             <Image
-              onPress={onPress}
+              //onPress={onPress}
               source={require('../assets/images/hum.png')}
               style={{ height: 15, width: 20 }}
             />
           </View>
-          <View style={{
-            paddingHorizontal: 10,
-            paddingVertical: 12,
-            borderRadius: 10,
-            marginTop: 30,
-            backgroundColor: "#b3cf99",
-            width: 45,
-            height: 47,
-            marginLeft: 290,
-            alignItems: "center",
-          }}>
-            <AntDesign name="user" size={24} color="black" />
-          </View>
-
+          <TouchableOpacity onPress={() => { navigation.navigate("SignIn") }}>
+            <View
+              style={{
+                paddingHorizontal: 10,
+                paddingVertical: 12,
+                borderRadius: 25,
+                marginTop: 30,
+                backgroundColor: "#89CFF0",
+                width: 50,
+                height: 50,
+                marginLeft: 280,
+                alignItems: "center",
+              }}>
+              <AntDesign name="user" size={24} color="black" />
+            </View>
+          </TouchableOpacity>
         </View>
+
         <ScrollView>
 
           <Text style={{
@@ -157,7 +162,7 @@ const Home = ({ navigation }) => {
           </View>
 
           <Text style={{
-            color: "#345c74",
+            color: "white",
             fontSize: 20,
             paddingHorizontal: 19,
             paddingTop: 19
