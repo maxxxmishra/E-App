@@ -1,28 +1,28 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import React from 'react';
 
-const CustomButton = ({ onPress, text, type = "PRIMARY", bgColor, fgColor }) => {
-    return (
-        <Pressable onPress={onPress}
-            style={[
-                styles.container,
-                styles[`container_${type}`],
-                bgColor ? { backgroundColor: bgColor } : {}
+const CustomButton = ({ onPress, text, type="PRIMARY", bgColor,           fgColor }) => {
+  return (
+    <Pressable onPress={onPress} 
+        style={[
+            styles.container,
+            styles[`container_${type}`],
+            bgColor ? {backgroundColor: bgColor} : {}
+    ]}>
+      <Text 
+        style={[
+            styles.text, 
+            styles[`text_${type}`],
+            fgColor ? {color: fgColor} : {}
             ]}>
-            <Text
-                style={[
-                    styles.text,
-                    styles[`text_${type}`],
-                    fgColor ? { color: fgColor } : {}
-                ]}>
-                {text}
-            </Text>
-        </Pressable>
-    );
+         {text}
+      </Text>
+    </Pressable>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    container:{
         backgroundColor: '#1e90ff',
         width: '95%',
         marginLeft: 10,
@@ -31,19 +31,27 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
     },
-    container_PRIMARY: {
+    container_PRIMARY:{
         backgroundColor: '#1e90ff',
     },
-    container_TERTIARY: {
+    container_SECONDARY:{
+        backgroundColor: 'white',
+        borderColor: '#3b71f3',
+        borderWidth: 2,
+    },  
+    container_TERTIARY:{
         backgroundColor: '#fff',
         marginTop: -5,
-    },
-    text: {
+    },  
+    text:{
         fontWeight: 'bold',
         color: 'white',
     },
-    text_TERTIARY: {
+    text_TERTIARY:{
         color: 'gray',
+    },
+    text_SECONDARY: {
+        color: '#3b71f3',
     },
 });
 
