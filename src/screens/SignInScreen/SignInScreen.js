@@ -1,104 +1,107 @@
-import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView } from 'react-native';
+import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView, TextInput} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Logo from '../../../assets/images/Dummy_Logo.png';
 import CustomInput from '../../../Components/CustomInput';
 import CustomButton from '../../../Components/CustomButton';
+import SocialSignInButtons from '../../../Components/SocialSignInButtons';
+import {useNavigation} from '@react-navigation/native';
+import {useForm, Controller} from 'react-hook-form';
 
 const SignInScreen = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    // const [username,setUsername] = useState('');
+    // const [password,setPassword] = useState('');
+
     const { height } = useWindowDimensions();
+    const navigation = useNavigation();
 
-    const onSignInPressed = () => {
-        console.warn("Sign In");
-    };
-    const onForgotPasswordPressed = () => {
-        console.warn("Forgot Password");
-    };
+    const {control, handleSubmit,formState:{errors}} = useForm();
+    
+    console.log(errors);
 
-    const onSignInFacebook = () => {
-        console.warn('facebook');
+    const onSignInPressed = (data) =>{
+      console.log(data);
+        // validate user
+        navigation.navigate('Home');
     };
-
-    const onSignInGoogle = () => {
-        console.warn('google');
-    };
-
-    const onSignUpPressed = () => {
-        console.warn('Sign Up')
+    const onForgotPasswordPressed =()=>{
+        navigation.navigate("ForgotPassword");
     };
 
-    return (
-        <ScrollView showsVerticalScrollIndicator={false}>
-            <SafeAreaView style={styles.container}>
-                <View style={StyleSheet.root}>
-                    <Image
-                        source={Logo}
-                        style={[styles.logo, { height: height * 0.3 }]}
-                        resizeMode="contain"
-                    />
-                    <View style={styles.dist}>
-                        <CustomInput
-                            placeholder="Username"
-                            value={username}
-                            setValue={setUsername}
-                        />
-                        <CustomInput
-                            placeholder="Password"
-                            value={password}
-                            setValue={setPassword}
-                            secureTextEntry={true}
-                        />
+    const onSignUpPressed =() =>{
+        navigation.navigate("SignUp");
+    };
 
-                        <CustomButton text="Sign In" onPress={onSignInPressed} />
+  return (
+    <ScrollView showsVerticalScrollIndicator={false}>
+    <SafeAreaView style={styles.container}>
+    <View style={StyleSheet.root}>
+      <Image 
+        source={Logo}
+        style={[styles.logo,{height: height *0.3}]}
+        resizeMode="contain"
+      />
+      <View style={styles.dist}>
 
-                        <CustomButton text="Forgot passord?"
-                            onPress={onForgotPasswordPressed}
-                            type="TERTIARY"
-                        />
+      <CustomInput 
+      name="username"
+      placeholder="Username" 
+      control={control}
+      rules={{required:'Username is required'}}
+      />
+      <CustomInput 
+      name="password"
+      placeholder="Password" 
+      control={control}
+      secureTextEntry ={true}
+      rules={{
+        required:'Password is required',
+        minLength:{
+          value: 8,
+          message: 'Password should be minimum 8 characters long',
+        },
+        }}
+      />
 
-                        <CustomButton
-                            text="Sign In with Facebook"
-                            onPress={onSignInFacebook}
-                            bgColor='#e7eaf4'
-                            fgColor='#4765a9'
-                        />
-                        <CustomButton
-                            text="Sign In with Google"
-                            onPress={onSignInGoogle}
-                            bgColor='#fae9ea'
-                            fgColor='#dd4d44'
-                        />
-                        <CustomButton text="Don't have an acoount? Create one"
-                            onPress={onSignUpPressed}
-                            type="TERTIARY"
-                        />
-                    </View>
-                </View>
-            </SafeAreaView>
-        </ScrollView>
-    );
+      <CustomButton text="Sign In" 
+        onPress={handleSubmit(onSignInPressed)}/>
+
+      <CustomButton text="Forgot passord?" 
+        onPress={onForgotPasswordPressed}
+        type="TERTIARY"
+      />
+
+        <SocialSignInButtons />
+
+        <CustomButton text="Don't have an acoount? Create one" 
+        onPress={onSignUpPressed}
+        type="TERTIARY"
+        />
+      </View>
+    </View>
+    </SafeAreaView>
+    </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    container:{
         backgroundColor: '#ffffff',
         flex: 1,
     },
-    root: {
+    root:{
         alignItems: 'center',
         padding: 20,
 
     },
-    logo: {
+    logo:{
         width: '70%',
         maxWidth: 300,
         maxHeight: 200,
         marginTop: 30,
         marginLeft: 50,
     },
-    dist: {
+    dist:{
         marginTop: 50,
     },
 });
