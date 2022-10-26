@@ -6,6 +6,7 @@ import VideoPlayer from './VideoPlayer'
 import Xd from './Xd'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SignInScreen from '../src/screens/SignInScreen/SignInScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ const Navigator = () => {
       <Stack.Screen name="Course" component={Course} options={{headerShown: false}} />
       <Stack.Screen name="VideoPlayer" component={VideoPlayer} options={{headerShown: false}}/>
       <Stack.Screen name="Xd" component={Xd} options={{headerShown: false}} />
+      <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   </NavigationContainer>
   )

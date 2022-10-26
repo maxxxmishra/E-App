@@ -2,8 +2,14 @@ import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-nati
 import React from 'react'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import Chapter from './Chapter'
+import C from '../Api/C'
 
-const Xd = ({navigation}) => {
+const Xd = (props) => {
+  // console.log(props.route.params)
+  let list = C[(props.route.params-1)].subtitle
+  console.log(props.route.params-1)
+  const Csnum = props.route.params-1 
+  
   return (
     <ImageBackground
       source={require('../assets/images/crs.png')}
@@ -17,7 +23,7 @@ const Xd = ({navigation}) => {
         marginTop: 20
       }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("Course")}
+          onPress={() => props.navigation.navigate("Course")}
           style={{
             paddingHorizontal: 10,
             paddingVertical: 13,
@@ -109,7 +115,7 @@ const Xd = ({navigation}) => {
             }}>Mikolaj Galezioski</Text>
             <Text style={{
               color: "#f58084",
-              
+
               fontSize: 12
             }}>
               Author, UI/UX Designer
@@ -130,62 +136,23 @@ const Xd = ({navigation}) => {
         </View>
 
         <View>
-          <Chapter
-            num={1}
-            color="#fde6e6"
-            percent={25}
-            duration="2 hours, 20 minutes"
-            title="Introduction"
-            onPress={() => navigation.navigate('VideoPlayer')}
-          />
-          <Chapter
-            num={1}
-            color="#fde6e6"
-            percent={25}
-            duration="2 hours, 20 minutes"
-            title="Introduction"
-            onPress={() => navigation.navigate('VideoPlayer')}
-          />
-          <Chapter
-            num={1}
-            color="#fde6e6"
-            percent={25}
-            duration="2 hours, 20 minutes"
-            title="Introduction"
-            onPress={() => navigation.navigate('VideoPlayer')}
-          />
-          <Chapter
-            num={1}
-            color="#fde6e6"
-            percent={25}
-            duration="2 hours, 20 minutes"
-            title="Introduction"
-            onPress={() => navigation.navigate('VideoPlayer')}
-          />
-          <Chapter
-            num={1}
-            color="#fde6e6"
-            percent={25}
-            duration="2 hours, 20 minutes"
-            title="Introduction"
-            onPress={() => navigation.navigate('VideoPlayer')}
-          />
-          <Chapter
-            num={1}
-            color="#fde6e6"
-            percent={25}
-            duration="2 hours, 20 minutes"
-            title="Introduction"
-            onPress={() => navigation.navigate('VideoPlayer')}
-          />
-          <Chapter
-            num={1}
-            color="#fde6e6"
-            percent={25}
-            duration="2 hours, 20 minutes"
-            title="Introduction"
-            onPress={() => navigation.navigate('VideoPlayer')}
-          />
+          {list.map((item,index) => {
+            
+            return (
+              <Chapter
+                num={index}
+                color="#fde6e6"
+                percent={25}
+                duration={item.time}
+                title={item.title}
+                onPress={() => props.navigation.navigate('VideoPlayer',[Csnum,index])}
+                key = {index}
+              />
+            )
+          })}
+
+
+
         </View>
       </ScrollView>
 

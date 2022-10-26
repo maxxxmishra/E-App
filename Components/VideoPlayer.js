@@ -1,35 +1,63 @@
-import React from 'react'
-import { View, StyleSheet, Image, StatusBar, Dimensions, Text } from 'react-native'
+import React ,{useRef} from 'react'
+import { View, StyleSheet, Image, StatusBar, Dimensions, Text ,Button } from 'react-native'
 import { Video } from 'expo-av'
 import Chapter from './Chapter'
+import YoutubePlayer , {YoutubeIframeRef} from 'react-native-youtube-iframe';
+import C from "../Api/C"
 
 
 const { width, height } = Dimensions.get("window");
 
-const VideoPlayer = () => {
+const VideoPlayer = (props) => {
+const Csnum =(props.route.params[0])
+const chnum =(props.route.params[1])
+
+  const playerRef = useRef();
+  // console.log(YoutubePlayer.render)
+  console.log(C[Csnum].subtitle[chnum].title)
+  
   return (
+    
     <View style={style.container}>
-      
+
       <StatusBar backgroundColor="#f58084" />
-      <Video
-        source={require('../assets/src/videos/maintro.mp4')}
-        rate={1.0}
-        isMuted={false}
-        resizeMode="cover"
-        shouldPlay={false}
-        isLooping={false}
-        useNativeControls
-        style={style.video}
-      />
-      <View style={{paddingTop:20}}>
-      <Chapter
-        color="#fde6e6"
-        percent={25}
-        duration="2 hours, 20 minutes"
-        title="Introduction"
-        num={1}
+      <YoutubePlayer
+        ref={playerRef}
+        height={250}
+
+        play={true}
+
+        videoId={C[Csnum].subtitle[chnum].videoId}
+        // onChangeState = {load}
+        // onPlaybackRateChange ={load}
         
+
+        
+
+
+
       />
+      <Button
+        title="log details"
+        onPress={() => {
+          playerRef.current?.getCurrentTime().then(
+            currentTime => console.log({currentTime})
+          );
+
+          playerRef.current?.getDuration().then(
+            getDuration => console.log({getDuration})
+          );
+        }}
+      />
+      <View style={{ paddingTop: 20 }}>
+        <Chapter
+          color="#fde6e6"
+          percent={25}
+          duration={C[Csnum].subtitle[chnum].time}
+          title={C[Csnum].subtitle[chnum].title}
+          num={chnum}
+
+        />
       </View>
       <Text style={{
 
@@ -51,29 +79,29 @@ const VideoPlayer = () => {
       </Text>
 
       <View style={{
-                   flexDirection:"row",
-                   
-                   backgroundColor:"#f58084",
-                   marginHorizontal:40,
-                   paddingVertical:15,
-                   alignItems:"center",
-                   borderRadius:10,
-                   justifyContent:"center",
-                   marginTop:20,
-                   marginBottom:70
-               }}>
-                   <Text style={{
-                       color:"#FFF",
-                      
-                       fontSize:15,
-                       marginRight:50,
-                       
-                       
-                   }}>
-                       Read more
-                   </Text>
-                   <Image source={require('../assets/images/a3.png')}/>
-               </View>
+        flexDirection: "row",
+
+        backgroundColor: "#f58084",
+        marginHorizontal: 40,
+        paddingVertical: 15,
+        alignItems: "center",
+        borderRadius: 10,
+        justifyContent: "center",
+        marginTop: 20,
+        marginBottom: 70
+      }}>
+        <Text style={{
+          color: "#FFF",
+
+          fontSize: 15,
+          marginRight: 50,
+
+
+        }}>
+          Read more
+        </Text>
+        <Image source={require('../assets/images/a3.png')} />
+      </View>
     </View>
   )
 }
@@ -88,7 +116,7 @@ const style = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     justifyContent: "center",
-    
+
   }
 })
 

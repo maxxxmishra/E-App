@@ -1,9 +1,10 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import {View,Text,Image,TouchableOpacity} from 'react-native'
-// import ProgressCircle from 'react-native-progress-circle'
+import CircularProgress from 'react-native-circular-progress-indicator';
+
 
 function Chapter({title,num, duration, percent, color, onPress}){
-    
+    const [value, setValue] = useState(0);
         return(
            <TouchableOpacity
                 onPress={onPress}
@@ -45,14 +46,29 @@ function Chapter({title,num, duration, percent, color, onPress}){
                        {duration}
                    </Text>
                </View>
-               <Text style={{
+               {/* <Text style={{
                    color:"#345c74",
                    
                    fontSize:13,
                    width:50
                }}>
                    {percent}%
-               </Text>
+               </Text> */}
+               
+               <View style={{ marginLeft: 50 }}>
+                    <CircularProgress
+                        radius={20}
+                        value={value}
+                        textColor='#222'
+                        fontSize={10}
+                        valueSuffix={'%'}
+                        inActiveStrokeColor={'red'}
+                        inActiveStrokeOpacity={0.2}
+                        inActiveStrokeWidth={6}
+                        duration={1000}
+                        onAnimationComplete={() => setValue(50)}
+                    />
+                </View>
 
                
            </TouchableOpacity>
