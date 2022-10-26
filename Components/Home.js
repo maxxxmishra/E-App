@@ -1,5 +1,9 @@
 import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, Button, SafeAreaView } from 'react-native';
+<<<<<<< HEAD
 import { ScrollView, TextInput,TouchableWithoutFeedback } from 'react-native-gesture-handler';
+=======
+import { ScrollView, TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+>>>>>>> f59c3d7b66e67ac8b045a0b48077f26def8ef1de
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -32,7 +36,11 @@ const Home = ({ navigation }) => {
             alignItems: "center",
           }}>
             <Image
+<<<<<<< HEAD
               // onPress={onPress}
+=======
+              //onPress={onPress}
+>>>>>>> f59c3d7b66e67ac8b045a0b48077f26def8ef1de
               source={require('../assets/images/hum.png')}
               style={{ height: 15, width: 20 }}
             />
@@ -54,6 +62,10 @@ const Home = ({ navigation }) => {
             </View>
           </TouchableOpacity>
         </View>
+<<<<<<< HEAD
+=======
+
+>>>>>>> f59c3d7b66e67ac8b045a0b48077f26def8ef1de
         <ScrollView>
 
           <Text style={{
