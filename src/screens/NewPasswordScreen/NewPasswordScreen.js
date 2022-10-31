@@ -7,14 +7,22 @@ import CustomButton from '../../../Components/CustomButton';
 import SocialSignInButtons from '../../../Components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
+import { Auth } from 'aws-amplify';
+
 
 const NewPasswordScreen= () => {
     const {control, handleSubmit} = useForm();
 
     const navigation = useNavigation();
      
-    const onSubmitPressed = () =>{
-        navigation.navigate("Home");
+    const onSubmitPressed = async(data) =>{
+      try{
+        const response = await Auth.forgotPasswordSubmit(data.username,data.code,data.password);
+        navigation.navigate("SignIn");
+      }
+      catch(e) {
+        Alert.alert('Oops', e.message);
+      }
     };
 
     const onSignInPressed =() =>{
@@ -30,7 +38,7 @@ const NewPasswordScreen= () => {
     <View style={StyleSheet.root}>
       <Text style={styles.title}>Reset your password</Text>
       <View style={styles.dist}>
-
+        
       <CustomInput 
       name="code"
       control={control}
