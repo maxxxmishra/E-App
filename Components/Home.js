@@ -1,15 +1,19 @@
 import { StyleSheet, Text, View, ImageBackground, Image,    TouchableOpacity, Button, SafeAreaView } from 'react-native';
 import { ScrollView, TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer} from '@react-navigation/native';
 import CourseList from "./CourseList";
 import { AntDesign, Octicons} from '@expo/vector-icons';
+import { Auth } from 'aws-amplify';
 
 
 const Home = ({ navigation }) => {
   function onPress() {
     navigation.navigate("Course")
+  }
+  const signOut = () => {
+    Auth.signOut();
   }
   return (
     <SafeAreaView>
@@ -55,6 +59,19 @@ const Home = ({ navigation }) => {
         </TouchableOpacity>
        </View>
 
+      <Text 
+        onPress={signOut}
+        style={{
+          width: '100%',
+          textAlign: 'center',
+          color: 'red',
+          marginTop: 'auto',
+          marginVertical: 20,
+          fontSize: 20,
+        }}
+      >
+        Sign Out
+      </Text>
       <ScrollView>
         
         <Text style={{
