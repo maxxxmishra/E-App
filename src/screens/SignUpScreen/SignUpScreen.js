@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, {useState} from 'react';
 import Logo from '../../../assets/images/Dummy_Logo.png';
@@ -7,6 +7,7 @@ import CustomButton from '../../../Components/CustomButton';
 import SocialSignInButtons from '../../../Components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
+import { Auth } from 'aws-amplify';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -15,8 +16,20 @@ const SignUpScreen = () => {
     const pwd = watch('password');
     const navigation = useNavigation();
      
-    const onRegisterPressed = () =>{
-        navigation.navigate('ConfirmEmail');
+    const onRegisterPressed = async (data) =>{
+      const {username, password, email, name} = data;
+      try{
+        const response = await Auth.signUp({
+          username,
+          password,
+          attributes:{email,name,preferred_username: username} 
+        });
+        navigation.navigate('ConfirmEmail',{username});
+      }
+      catch(e){
+        Alert.alert('Oops',e.message);
+      }
+        
     };
 
     const onSignInPressed =() =>{
@@ -40,6 +53,22 @@ const SignUpScreen = () => {
       <Text style={styles.title}>Create an account</Text>
       <View style={styles.dist}>
 
+    <CustomInput 
+      name="name"
+      control={control}
+      placeholder="Name" 
+      rules={{
+        required: 'Name is required',
+        minLength: {
+          value: 3,
+          message: 'Name should be at least 3 characters long',
+        },
+        maxLength: {
+          value: 24,
+          message: 'Name should be max 24 characters long',
+        },
+      }}
+       />
     <CustomInput 
       name="username"
       control={control}
