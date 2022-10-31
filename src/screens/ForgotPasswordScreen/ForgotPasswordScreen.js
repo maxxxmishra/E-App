@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Alert} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, {useState} from 'react';
 import Logo from '../../../assets/images/Dummy_Logo.png';
@@ -7,15 +7,21 @@ import CustomButton from '../../../Components/CustomButton';
 import SocialSignInButtons from '../../../Components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
+import { Auth } from 'aws-amplify';
 
 const ForgotPasswordScreen = () => {
     const {control, handleSubmit} = useForm();
 
     const navigation = useNavigation();
 
-    const onSendPressed = (data) =>{
-        console.warn(data);
-        navigation.navigate("NewPassword");
+    const onSendPressed = async(data) =>{
+        try{
+            const response = await Auth.forgotPassword(data.username);
+            navigation.navigate("NewPassword");
+          }
+          catch(e) {
+            Alert.alert('Oops', e.message);
+          }
     };
 
     const onSignInPressed =() =>{
