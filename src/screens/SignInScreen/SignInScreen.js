@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView, TextInput} from 'react-native';
+import { View, Text, Image, StyleSheet, useWindowDimensions, ScrollView, TextInput, Alert} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, {useState} from 'react';
 import Logo from '../../../assets/images/Dummy_Logo.png';
@@ -6,24 +6,37 @@ import CustomInput from '../../../Components/CustomInput';
 import CustomButton from '../../../Components/CustomButton';
 import SocialSignInButtons from '../../../Components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
-import {useForm, Controller} from 'react-hook-form';
+import {useForm, Controller} from 'react-hook-form';  
+import {Auth} from 'aws-amplify';
+
+// Amplify.configure(awsconfig);
 
 const SignInScreen = () => {
-    // const [username,setUsername] = useState('');
-    // const [password,setPassword] = useState('');
-
     const { height } = useWindowDimensions();
     const navigation = useNavigation();
+    const [loading, setLoading] = useState(false);
 
     const {control, handleSubmit,formState:{errors}} = useForm();
     
     console.log(errors);
 
-    const onSignInPressed = (data) =>{
-      console.log(data);
-        // validate user
-        navigation.navigate('Home');
+    const onSignInPressed = async(data) =>{
+      if(loading){
+        return;
+      }
+      setLoading(true);
+
+      try{
+        const response = await Auth.signIn(data.username, data.password);
+        console.log(response);
+        navigation.navigate("Home");
+      }
+      catch(e) {
+        Alert.alert('Oops', e.message);
+      }
+      setLoading(false);
     };
+
     const onForgotPasswordPressed =()=>{
         navigation.navigate("ForgotPassword");
     };
@@ -63,7 +76,7 @@ const SignInScreen = () => {
         }}
       />
 
-      <CustomButton text="Sign In" 
+      <CustomButton text={loading ? "Loading..." : "Sign In"} 
         onPress={handleSubmit(onSignInPressed)}/>
 
       <CustomButton text="Forgot passord?" 
@@ -105,5 +118,6 @@ const styles = StyleSheet.create({
         marginTop: 50,
     },
 });
+
 
 export default SignInScreen;
