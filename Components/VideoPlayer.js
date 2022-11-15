@@ -1,5 +1,5 @@
 import React ,{useRef} from 'react'
-import { View, StyleSheet, Image, StatusBar, Dimensions, Text ,Button } from 'react-native'
+import { View, StyleSheet, Image, StatusBar, Dimensions, Text ,Button ,Linking} from 'react-native'
 import { Video } from 'expo-av'
 import Chapter from './Chapter'
 import YoutubePlayer , {YoutubeIframeRef} from 'react-native-youtube-iframe';
@@ -9,18 +9,24 @@ import {useNavigation} from '@react-navigation/native';
 
 const { width, height } = Dimensions.get("window");
 
+
 const VideoPlayer = (props) => {
+
 const Csnum =(props.route.params[0])
 const chnum =(props.route.params[1])
 const des =(props.route.params[2])
 console.log(Csnum , chnum)
 
+const li = C[Csnum].link
 const navigation = useNavigation();
 
   const playerRef = useRef();
   // console.log(YoutubePlayer.render)
-  function press(){
-    // navigation.navigate(https://reactnative.dev/docs/handling-touches)
+  const press = ()=>{
+    Linking.canOpenURL('https://www.google.com/').then((supported)=>{
+      supported && Linking.openURL(li)
+    })
+    console.log(li)
   }
 
   
