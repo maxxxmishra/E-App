@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ImageBackground, Image,    TouchableOpacity, Button, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Image,Dimensions, TouchableOpacity, Button, SafeAreaView } from 'react-native';
 import { ScrollView, TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import React, { StrictMode } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -6,6 +6,8 @@ import { NavigationContainer} from '@react-navigation/native';
 import CourseList from "./CourseList";
 import { AntDesign, Octicons} from '@expo/vector-icons';
 import { Auth } from 'aws-amplify';
+
+const { width, height } = Dimensions.get("window");
 
 
 const Home = ({ navigation }) => {
@@ -28,11 +30,11 @@ const Home = ({ navigation }) => {
           paddingHorizontal: 10,
           paddingVertical: 15,
           borderRadius: 10,
-          marginTop: 30,
+          marginTop: height/25,
           backgroundColor: "#d1a0a7",
           width: 45,
           height: 40,
-          marginLeft: 0,
+          marginLeft: width/15,
           alignItems: "center",
         }}>
           <Image
@@ -41,17 +43,17 @@ const Home = ({ navigation }) => {
             style={{ height: 15, width: 20 }}
           />
         </View>
-        <TouchableOpacity onPress={()=>{navigation.navigate("SignIn")}}>
+        <TouchableOpacity onPress={()=>{navigation.navigate("")}}>
         <View 
           style={{
           paddingHorizontal: 10,
           paddingVertical: 12,
           borderRadius: 25,
-          marginTop: 30,
+          marginTop: height/25,
           backgroundColor: "#89CFF0",
           width: 50,
           height: 50,
-          marginLeft: 280,
+          marginLeft: width/1.55,
           alignItems: "center",
         }}>
         <AntDesign name="user" size={24} color="black" />
@@ -59,19 +61,24 @@ const Home = ({ navigation }) => {
         </TouchableOpacity>
        </View>
 
+      <View>
       <Text 
         onPress={signOut}
         style={{
           width: '100%',
           textAlign: 'center',
           color: 'red',
-          marginTop: 'auto',
+          marginTop: height/15,
           marginVertical: 20,
           fontSize: 20,
+          marginBottom : -15,
+          marginLeft :width/3
         }}
       >
         Sign Out
       </Text>
+      
+      </View>
       <ScrollView>
         
         <Text style={{
@@ -153,12 +160,12 @@ const Home = ({ navigation }) => {
                 flexDirection: "row",
                 marginTop: 20,
                 alignItems: "center",
-                width: 150,
+                width: 160,
                 borderRadius: 14,
                 paddingHorizontal: 10,
                 paddingVertical: 10,
               }}>
-              <Text style={{ width: 90, fontWeight:'400', fontSize:17 }}>
+              <Text style={{ width: 100, fontWeight:'400', fontSize:17 }}>
                 Categories
               </Text>
               <AntDesign name="arrowright" size={24} color="white" 
