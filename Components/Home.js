@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, ImageBackground, Image,Dimensions, TouchableOpacity, Button, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Image,Dimensions, TouchableOpacity, Button, SafeAreaView, ActivityIndicator } from 'react-native';
 import { ScrollView, TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import React, { StrictMode } from 'react';
+import React, { StrictMode, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer} from '@react-navigation/native';
 import CourseList from "./CourseList";
@@ -10,12 +10,22 @@ import { Auth } from 'aws-amplify';
 const { width, height } = Dimensions.get("window");
 
 
+
+
 const Home = ({ navigation }) => {
   function onPress() {
     navigation.navigate("Course")
   }
-  const signOut = () => {
-    Auth.signOut();
+  /* Loader*/
+// const [loading, setLoading] = useState(false);
+  const signOut = (data) => {
+    // if(loading){
+      Auth.signOut();
+      // <ActivityIndicator />
+    //   return;
+    // }
+    // setLoading(true);
+    
   }
   return (
     <SafeAreaView>
@@ -30,7 +40,7 @@ const Home = ({ navigation }) => {
           paddingHorizontal: 10,
           paddingVertical: 15,
           borderRadius: 10,
-          marginTop: height/25,
+          marginTop: height/30,
           backgroundColor: "#d1a0a7",
           width: 45,
           height: 40,
@@ -49,7 +59,7 @@ const Home = ({ navigation }) => {
           paddingHorizontal: 10,
           paddingVertical: 12,
           borderRadius: 25,
-          marginTop: height/25,
+          marginTop: height/30,
           backgroundColor: "#89CFF0",
           width: 50,
           height: 50,
@@ -61,22 +71,28 @@ const Home = ({ navigation }) => {
         </TouchableOpacity>
        </View>
 
-      <View>
-      <Text 
+      <View styles={{width: '30%', height: 20, margin: 10 }}>
+      <TouchableOpacity 
+        title = 'SignOut'
         onPress={signOut}
+        
         style={{
-          width: '100%',
+          width: '30%',
           textAlign: 'center',
           color: 'red',
           marginTop: height/15,
           marginVertical: 20,
           fontSize: 20,
           marginBottom : -15,
-          marginLeft :width/3
+          marginLeft :width/1.5,
+          // backgroundColor : 'royalblue',
+          padding: 20,
+          marginRight: 15
+          
         }}
       >
-        Sign Out
-      </Text>
+        <Text styles = {{fontSize: 30, color: 'royalblue'}}>Sign Out</Text>
+      </TouchableOpacity>
       
       </View>
       <ScrollView>
