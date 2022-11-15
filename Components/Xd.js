@@ -1,9 +1,10 @@
-import { View, Text, ImageBackground, TouchableOpacity, Image } from 'react-native'
+import { View, Text, ImageBackground,Dimensions, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import Chapter from './Chapter'
 import C from '../Api/C'
 
+const { width, height } = Dimensions.get("window");
 const Xd = (props) => {
   // console.log(props.route.params)
   let list = C[(props.route.params-1)].subtitle
@@ -37,19 +38,7 @@ const Xd = (props) => {
             style={{ height: 15, width: 20 }}
           />
         </TouchableOpacity>
-        <View style={{
-          paddingHorizontal: 10,
-          paddingVertical: 13,
-          borderRadius: 10,
-          marginTop: 30,
-          backgroundColor: "#9a3c7e",
-          marginLeft: 240
-        }}>
-          <Image
-            source={require('../assets/images/hum.png')}
-            style={{ height: 15, width: 20 }}
-          />
-        </View>
+        
       </View>
       <View style={{ marginTop: 30 }}>
         <Image
