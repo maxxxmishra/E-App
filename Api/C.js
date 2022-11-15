@@ -1,5 +1,5 @@
 const C = [
-    {   
+    {   link : 'https://www.geeksforgeeks.org/theory-of-computation-automata-tutorials/',
         ID:"1",
         "title":"Theory of Computation",
         "bg":"#fcf2ff",
@@ -15,8 +15,9 @@ const C = [
             
         ],
         des : "The Theory of Constraints is a methodology for identifying the most important limiting factor (i.e., constraint) that stands in the way of achieving a goal and then systematically improving that constraint until it is no longer the limiting factor. In manufacturing, the constraint is often referred to as a bottleneck.The Theory of Constraints takes a scientific approach to improvement. It hypothesizes that every complex system, including manufacturing processes, consists of multiple linked activities, one of which acts as a constraint upon the entire system (i.e., the constraint activity is the “weakest link in the chain”)."
+        
     },
-    {   
+    {   link : 'https://byjus.com/commerce/business-environment/',
         ID:"2",
         "title":"Business Environment ",
         "bg":"#fcf2ff",
@@ -31,9 +32,11 @@ const C = [
             {title : "SUMMARY" ,time :"28 minutes, 42 seconds",videoId :"mkjK_BDrPDM"},
             
         ],
-        des : "Business environment refers to “the total of all things external to firms and industries which affect their organisation and operation. Bayord O. Wheeler. Business environment encompasses the climate or set of conditions, economic, social, political, or institutional in which business operations are conducted.Business environment helps in identifying business opportunities, tapping useful resources, assists in planning, and improves the overall performance, growth, and profitability of the business. There are various types of Business Environment like Micro Environment and Macro Environment."
+        des : "Business environment refers to “the total of all things external to firms and industries which affect their organisation and operation. Bayord O. Wheeler. Business environment encompasses the climate or set of conditions, economic, social, political, or institutional in which business operations are conducted.Business environment helps in identifying business opportunities, tapping useful resources, assists in planning, and improves the overall performance, growth, and profitability of the business. There are various types of Business Environment like Micro Environment and Macro Environment.",
+
     },
     {
+        link : 'https://www.javatpoint.com/discrete-mathematics-tutorial',       
         ID:"3",
         img:require('../assets/images/sketch.png'),
           title:"Discrete Mathematics",
@@ -51,6 +54,7 @@ const C = [
         des : "This course enables students to strengthen and increase the understanding of discrete mathematics with special emphasis on computer science applications. Topics include sets, number systems, the nature of proof, formal logic, functions and relations, combinatorics, recurrence relations, trees and Boolean algebra."
     },
     {
+        link : 'https://www.python.org/',       
         ID:"4",
         img:require('../assets/images/sketch.png'),
           title:"Python",
@@ -69,6 +73,7 @@ const C = [
         des : "Python is a computer programming language often used to build websites and software, automate tasks, and conduct data analysis. Python is a general-purpose language, meaning it can be used to create a variety of different programs and isn't specialized for any specific problems.Python is an interpreted, object-oriented, high-level programming language with dynamic semantics developed by Guido van Rossum. It was originally released in 1991. Designed to be easy as well as fun, the name Python is a nod to the British comedy group Monty Python."
     },
     {
+        link : 'https://www.sathyabama.ac.in/course-materials/engineering-mathematics-1',       
         ID:"5",
         img:require('../assets/images/ae.png'),
           title:"Engineering Mathematics-1",
@@ -92,6 +97,7 @@ const C = [
         des : "The course consists of topics in differential calculus,integral calculus, linear algebra and differential equations with applications to various engineering problems. This course will cover the following main topics: Mean Value Theorems; Indeterminate Forms; Taylor's and Maclaurin's Theorems.Engineering mathematics is the art of applying maths to complex real-world problems; combining mathematical theory, practical engineering and scientific computing to address today's technological challenges."
     },
     {
+        link : 'https://easyengineering.net/engineering-mathematics-ii-by-ganesh/',       
         ID:"6",
         img:require('../assets/images/ae.png'),
           title:"Engineering Mathematics-2",
@@ -109,6 +115,7 @@ const C = [
         des : "This course is about the basic mathematics that is fundamental and essential component in all streams of undergraduate studies in sciences and engineering. The course consists of topics in complex analysis,numerical analysis, vector calculus and transform techniques with applications to various engineering problems.Engineering mathematics is the art of applying maths to complex real-world problems; combining mathematical theory, practical engineering and scientific computing to address today's technological challenges."
     },
     {
+        link : 'http://www.tndte.gov.in/site/wp-content/uploads/2016/08/Engineering-Mathematics-II.pdf',       
         ID:"7",
         img:require('../assets/images/ae.png'),
           title:"Engineering Mathematics-3",
@@ -127,6 +134,7 @@ const C = [
         des : "Image result for Engineering Mathematics-3 description in briefEngineering mathematics is the art of applying maths to complex real-world problems; combining mathematical theory, practical engineering and scientific computing to address today's technological challenges.Definition Fourier integral theorem(without proof) - Fourier sine and cosine integrals Fourier transforms –Properties of Fourier transforms Convolution theorem Parseval's identity for Fourier transforms Relation between Fourier and Laplace transforms Fourier transforms of the derivatives of ..."
     },
     {
+        link : 'https://www.javatpoint.com/java-oops-concepts',       
         ID:"8",
         img:require('../assets/images/ae.png'),
           title:"OOPS",
@@ -146,6 +154,7 @@ const C = [
     },
 
     {
+        link : 'https://www.geeksforgeeks.org/lmns-gq/',       
         ID:"9",
         img:require('../assets/images/f.png'),
         title:"Figma Essentials",
@@ -161,7 +170,8 @@ const C = [
             {title : "Summary" ,time :"3 minutes, 13 seconds",videoId :"EqsFdDmYzxU"},
         ]
     },
-    {   ID:"10",
+    {   link : 'https://www.geeksforgeeks.org/lmns-gq/',
+        ID:"10",
         img:require('../assets/images/ps.png'),
           title:"Adobe Photoshop. Retouching",
           bg:"#fdddf3",
@@ -176,7 +186,8 @@ const C = [
             {title : "Summary" ,time :"3 minutes, 13 seconds",videoId :"EqsFdDmYzxU"},
         ]
     },
-    {   ID:"11",
+  {     link : 'https://www.geeksforgeeks.org/lmns-gq/',  
+        ID:"11",
         img:require('../assets/images/sketch.png'),
         title:"Sketch shortcuts and tricks",
         bg:"#fef8e3",
