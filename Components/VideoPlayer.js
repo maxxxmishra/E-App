@@ -4,6 +4,7 @@ import { Video } from 'expo-av'
 import Chapter from './Chapter'
 import YoutubePlayer , {YoutubeIframeRef} from 'react-native-youtube-iframe';
 import C from "../Api/C"
+import {useNavigation} from '@react-navigation/native';
 
 
 const { width, height } = Dimensions.get("window");
@@ -11,10 +12,17 @@ const { width, height } = Dimensions.get("window");
 const VideoPlayer = (props) => {
 const Csnum =(props.route.params[0])
 const chnum =(props.route.params[1])
+const des =(props.route.params[2])
+console.log(Csnum , chnum)
+
+const navigation = useNavigation();
 
   const playerRef = useRef();
   // console.log(YoutubePlayer.render)
-  console.log(C[Csnum].subtitle[chnum].title)
+  function press(){
+    // navigation.navigate(https://reactnative.dev/docs/handling-touches)
+  }
+
   
   return (
     
@@ -37,18 +45,7 @@ const chnum =(props.route.params[1])
 
 
       />
-      <Button
-        title="log details"
-        onPress={() => {
-          playerRef.current?.getCurrentTime().then(
-            currentTime => console.log({currentTime})
-          );
-
-          playerRef.current?.getDuration().then(
-            getDuration => console.log({getDuration})
-          );
-        }}
-      />
+      
       <View style={{ paddingTop: 20 }}>
         <Chapter
           color="#fde6e6"
@@ -66,41 +63,27 @@ const chnum =(props.route.params[1])
         paddingLeft: 42,
         paddingRight: 35
       }}>
-        User experiance (UX) design is the process design teams use to create
-        products that provide meaningful and relevant experiances to users. This
-        involves the design of the entire process of acquiring and integrating
-        the product, including aspects of branding, design, usability and function.
-        "User Experience Design" is often used interchangeably with
-        terms such as "User Interfase Design" and "usability". However, while
-        usability and user interfase (UI) design are important aspects of UX
-        design, they are subsets of it - UX design covers a vast array of other
-        areas, too. A UX designer is concerned with the entire process of
-        acquiring and integrating a product,...
+        {C[Csnum].des}
+        {C[Csnum].des1}
       </Text>
 
-      <View style={{
-        flexDirection: "row",
-
-        backgroundColor: "#f58084",
-        marginHorizontal: 40,
-        paddingVertical: 15,
-        alignItems: "center",
-        borderRadius: 10,
-        justifyContent: "center",
-        marginTop: 20,
-        marginBottom: 70
-      }}>
-        <Text style={{
-          color: "#FFF",
-
-          fontSize: 15,
-          marginRight: 50,
-
-
-        }}>
-          Read more
-        </Text>
-        <Image source={require('../assets/images/a3.png')} />
+      <View >
+        <Button 
+        title='Read more'
+        style={{
+          flexDirection: "row",
+  
+          backgroundColor: "#f58084",
+          marginHorizontal: 40,
+          paddingVertical: 15,
+          alignItems: "center",
+          borderRadius: 10,
+          justifyContent: "center",
+          marginTop: 20,
+          marginBottom: 70
+        }}
+        onPress ={press}
+        />
       </View>
     </View>
   )
