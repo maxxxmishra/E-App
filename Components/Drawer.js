@@ -1,0 +1,96 @@
+import { View, ActivityIndicator } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import Home from './Home';
+import Course from './Course';
+import Profile from './Profile';
+import Aboutus from './Aboutus';
+import VideoPlayer from './VideoPlayer';
+import Xd from './Xd';
+import SignInScreen from '../src/screens/SignInScreen/SignInScreen';
+import SignUpScreen from '../src/screens/SignUpScreen/SignUpScreen';
+import ConfirmEmailScreen from '../src/screens/ConfirmEmailScreen/ConfirmEmailScreen';
+import ForgotPasswordScreen from '../src/screens/ForgotPasswordScreen/ForgotPasswordScreen';
+import NewPasswordScreen from '../src/screens/NewPasswordScreen/NewPasswordScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {Auth, Hub} from 'aws-amplify';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Component from './Component';
+
+const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
+
+
+
+
+
+const Drawernav = () => {
+  const [user, setUser] = useState(undefined);
+
+  const checkUser = async () => {
+    try {
+      const authUser = await Auth.currentAuthenticatedUser({bypassCache: true});
+      setUser(authUser);
+    } catch (e) {
+      setUser(null);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  useEffect(() => {
+    const listener = data => {
+      if (data.payload.event === 'signIn' || data.payload.event === 'signOut') {
+        checkUser();
+      }
+    };
+
+    Hub.listen('auth', listener);
+    return () => Hub.remove('auth', listener);
+  }, []);
+
+  if (user === undefined) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <ActivityIndicator size="large"/>
+      </View>
+    );
+  }
+  
+  return (
+  <NavigationContainer>
+    <Drawer.Navigator   
+    initialRouteName="Home" 
+    drawerContent= {props=> <Component{...props}/>}
+    screenOptions = {{title:'Aԃԋყαყαɳαɱ',
+    headerStyle :{backgroundColor:'#505050'}}}
+    >
+      {user ? (
+      <>
+      <Drawer.Screen name="Home" component={Home}  />
+      <Drawer.Screen name="Course" component={Course} options={{headerShown: false}} />
+      <Drawer.Screen name="Profile" component={Profile} options={{headerShown: false}}/>
+      <Drawer.Screen name="Aboutus" component={Aboutus} options={{headerShown: false}} />
+      <Stack.Screen name="VideoPlayer" component={VideoPlayer} options={{headerShown: false}}/>
+      <Stack.Screen name="Xd" component={Xd} options={{headerShown: false}} />
+      </>
+      ) : (
+      <>
+      <Drawer.Screen name="SignIn" component={SignInScreen} options={{headerShown: false}} />
+      <Drawer.Screen name="SignUp" component={SignUpScreen} options={{headerShown: false}} />
+      <Drawer.Screen name="ConfirmEmail" component={ConfirmEmailScreen} options={{headerShown: false}} />
+      <Drawer.Screen name="ForgotPassword" 
+      component={ForgotPasswordScreen} options={{headerShown: false}} />
+      <Drawer.Screen name="NewPassword" component={NewPasswordScreen} options={{headerShown: false}} />
+      </>
+      )}
+    </Drawer.Navigator>
+
+    
+  </NavigationContainer>
+  );
+};
+
+export default Drawernav;
